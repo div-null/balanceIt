@@ -27,7 +27,19 @@ public class Platform : MonoBehaviour
 	[SerializeField]
 	private float forcePush=2f;
 
-    private void Start()
+	[SerializeField]
+	private float pushDeadZone = 0.2f;
+
+	[SerializeField]
+	private float staticAngularDrag = 5f;
+
+	[SerializeField]
+	private float dynamicAngularDrag = 0.1f;
+
+	[SerializeField]
+	private float maxAngularVelocity = 120;
+
+	private void Start()
     {
 		camera = Camera.main;
 		screenCenter = new Vector2(Screen.width/ 2, Screen.height/ 2);
@@ -40,6 +52,7 @@ public class Platform : MonoBehaviour
 		if ( Input.GetMouseButton(0) )
 			{
 			newInput = getMousePosition().x;
+			//Debug.Log(newInput);
 
 			if ( newInput > mouseBoudaries.max )
 				newInput = mouseBoudaries.max;
@@ -67,19 +80,32 @@ public class Platform : MonoBehaviour
 
 	private void FixedUpdate ()
 		{
-		platform.AddTorque(forcePush * deltaPush, ForceMode2D.Force);
+		if ( Mathf.Abs(deltaPush) < pushDeadZone )
+			{
+			platform.angularDrag = staticAngularDrag;
+			}
+		else
+			{
+			// вращение
+			platform.angularDrag = dynamicAngularDrag;
+			platform.AddTorque(forcePush * deltaPush, ForceMode2D.Impulse);
+
+			if ( Mathf.Abs(platform.angularVelocity) > maxAngularVelocity )
+				platform.angularVelocity = maxAngularVelocity * Math.Sign(platform.angularVelocity);
+			}
+
 
 		if ( platform.rotation > angleBoudaries.max )
 			{
 			float coeff = 1+ deltaAngle(platform.rotation, angleBoudaries.max) / 30;
-			platform.AddTorque(-4 * coeff * forcePush, ForceMode2D.Force);
+			platform.AddTorque(-4 * coeff * platform.angularDrag * forcePush, ForceMode2D.Force);
 			//platform.rotation = angleBoudaries.max;
 			}
 
 		if ( platform.rotation < angleBoudaries.min )
 			{
 			float coeff = 1 + deltaAngle(platform.rotation, angleBoudaries.min) / 30;
-			platform.AddTorque(4 * coeff * forcePush, ForceMode2D.Force);
+			platform.AddTorque(4 * coeff * platform.angularDrag * forcePush, ForceMode2D.Force);
 			//platform.rotation = angleBoudaries.min;
 			}
 

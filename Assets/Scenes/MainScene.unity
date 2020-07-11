@@ -280,7 +280,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 519420031}
   platform: {fileID: 1039099097}
-  forcePush: 15
+  forcePush: 5
+  pushDeadZone: 0.01
+  staticAngularDrag: 5
+  dynamicAngularDrag: 0.5
+  maxAngularVelocity: 120
 --- !u!4 &1039099096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3449264432121200904, guid: 491e9edd692fd0741afd4296bdf47acb,
