@@ -23,7 +23,7 @@ public class GameUI : Singleton<GameUI>
 
 	public void FinishGame (int score)
 		{
-		// отобразить конце игры
+        FindObjectOfType<Canvas>().GetComponent<GeneralUI>().ToEndMatchMenu(score);
 		}
 
 	public void DrawScore (int score)
