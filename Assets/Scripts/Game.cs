@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Collider2D))]
 public class Game : Singleton<Game>
@@ -10,7 +11,11 @@ public class Game : Singleton<Game>
 	//мертвая зона для мяча
 	public Collider2D deadZone;
 
-	[SerializeField]
+    public GameObject bombPrefab;
+    public GameObject meteoritePrefab;
+    public GameObject dropPrefab;
+
+    [SerializeField]
 	public GameObject World;
 
 	private int gameScore;
@@ -58,10 +63,35 @@ public class Game : Singleton<Game>
 			{
 			yield return new WaitForSeconds(1f);
 			GameScore++;
-			}
+            if (GameScore > 10)
+                StartCoroutine(SpawnBombs());
+
+            if (GameScore > 15)
+                StartCoroutine(SpawnMeteorites());
+            }
 		}
 
-	IEnumerator StartGame ()
+
+
+    IEnumerator SpawnBombs()
+    {
+        yield return new WaitForSeconds(3f);
+        Instantiate(bombPrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
+    }
+
+    IEnumerator SpawnDrops()
+    {
+        yield return new WaitForSeconds(1f);
+        Instantiate(dropPrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
+    }
+
+    IEnumerator SpawnMeteorites()
+    {
+        yield return new WaitForSeconds(5f);
+        Instantiate(meteoritePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
+    }
+
+    IEnumerator StartGame ()
 		{
 		StopCoroutine(IncreaseScore());
 		World.SetActive(true);

@@ -312,11 +312,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
-  platform: {fileID: 1039099097}
-  forcePush: 5
-  pushDeadZone: 0.01
+  platform: {fileID: 0}
+  forcePush: 2
+  pushDeadZone: 0.2
   staticAngularDrag: 5
-  dynamicAngularDrag: 0.5
+  dynamicAngularDrag: 0.1
   maxAngularVelocity: 120
 --- !u!1 &755451903
 GameObject:
@@ -349,6 +349,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadZone: {fileID: 755451905}
+  bombPrefab: {fileID: 4798339868033978432, guid: 167680f0170e9374883296ffd127b0c4,
+    type: 3}
+  meteoritePrefab: {fileID: 4798339868033978432, guid: 167680f0170e9374883296ffd127b0c4,
+    type: 3}
+  dropPrefab: {fileID: 4798339868033978432, guid: 167680f0170e9374883296ffd127b0c4,
+    type: 3}
   World: {fileID: 278390916}
 --- !u!61 &755451905
 BoxCollider2D:
@@ -393,12 +399,6 @@ Transform:
 --- !u!4 &1039099096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3449264432121200904, guid: 491e9edd692fd0741afd4296bdf47acb,
-    type: 3}
-  m_PrefabInstance: {fileID: 3449264432190203344}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1039099097 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 3449264432121200905, guid: 491e9edd692fd0741afd4296bdf47acb,
     type: 3}
   m_PrefabInstance: {fileID: 3449264432190203344}
   m_PrefabAsset: {fileID: 0}

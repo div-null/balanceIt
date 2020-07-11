@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +15,7 @@ public class GameUI : Singleton<GameUI>
 		{
 		Game.Instance.Initialize();
 		}
+
 	public void StartGame ()
 		{
 		ScoreText.text = "Score: 0";
@@ -31,4 +30,4 @@ public class GameUI : Singleton<GameUI>
 		{
 		ScoreText.text = "Score: " + score;
 		}
-	}
+}
