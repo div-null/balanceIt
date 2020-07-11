@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ball
   - Bomb
+  - Platform
+  - Meteor
+  - Drop
   layers:
   - Default
   - TransparentFX

@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 737035302}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,9 +351,9 @@ MonoBehaviour:
   deadZone: {fileID: 755451905}
   bombPrefab: {fileID: 4798339868033978432, guid: 167680f0170e9374883296ffd127b0c4,
     type: 3}
-  meteoritePrefab: {fileID: 4798339868033978432, guid: 167680f0170e9374883296ffd127b0c4,
+  meteoritePrefab: {fileID: 6306867303546836168, guid: adabf2601aca7df4ba40ee8f9d142cd7,
     type: 3}
-  dropPrefab: {fileID: 4798339868033978432, guid: 167680f0170e9374883296ffd127b0c4,
+  dropPrefab: {fileID: 3437711596556020645, guid: 4199d03b8cf26b34b895c76e2e9ecaa4,
     type: 3}
   World: {fileID: 278390916}
 --- !u!61 &755451905
