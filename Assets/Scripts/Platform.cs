@@ -54,11 +54,11 @@ public class Platform : MonoBehaviour
 			newInput = getMousePosition().x;
 			//Debug.Log(newInput);
 
-			if ( newInput > mouseBoudaries.max )
-				newInput = mouseBoudaries.max;
+			//if ( newInput > mouseBoudaries.max )
+			//	newInput = mouseBoudaries.max;
 
-			if ( newInput < mouseBoudaries.min )
-				newInput = mouseBoudaries.min;
+			//if ( newInput < mouseBoudaries.min )
+			//	newInput = mouseBoudaries.min;
 
 			if ( input == null )
 				{

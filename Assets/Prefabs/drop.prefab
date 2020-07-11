@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3884435830774347005}
   - component: {fileID: 4876351200032751628}
   - component: {fileID: 9153018522555082266}
-  - component: {fileID: 8087644780077022159}
   m_Layer: 0
   m_Name: drop
   m_TagString: Drop
@@ -46,7 +45,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.01
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -71,18 +70,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.0877112
---- !u!114 &8087644780077022159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3437711596556020645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ee20742b8a01e4d919c7bb3645021f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8041421899104967716
 GameObject:
   m_ObjectHideFlags: 0
