@@ -37,7 +37,7 @@ public class Platform : MonoBehaviour
 	private float dynamicAngularDrag = 0.1f;
 
 	[SerializeField]
-	private float maxAngularVelocity = 120;
+	private float maxStaticAngularVelocity = 60;
 
 	private void Start()
     {
@@ -86,10 +86,12 @@ public class Platform : MonoBehaviour
 			}
 		else
 			{
-			// вращение
-			platform.angularDrag = dynamicAngularDrag;
+			// измеряю трение вращения платформы от величины перемещения
+			platform.angularDrag = staticAngularDrag / Mathf.Abs(deltaPush * deltaPush) / 10;
+			// прилагаю момент инерции
 			platform.AddTorque(forcePush * deltaPush, ForceMode2D.Impulse);
-
+			// измеряю максимальную угловую скорость платформы от величины перемещения
+			float maxAngularVelocity = maxStaticAngularVelocity * Mathf.Sqrt(Mathf.Abs(deltaPush));
 			if ( Mathf.Abs(platform.angularVelocity) > maxAngularVelocity )
 				platform.angularVelocity = maxAngularVelocity * Math.Sign(platform.angularVelocity);
 			}
