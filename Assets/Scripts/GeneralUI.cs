@@ -72,13 +72,13 @@ public class GeneralUI : Singleton<GeneralUI>
 	{
 
 		toMainMenu();
-        //Camera cam = Camera.main;
-        //float screenRaio = (float)Screen.width / Screen.height;
-        //float bgRatio = background.bounds.size.x / background.bounds.size.y;
-        //float fgRatio = foreground.bounds.size.x / foreground.bounds.size.y;
+		Camera cam = Camera.main;
+		float screenRaio = (float)Screen.width / Screen.height;
+		float bgRatio = background.bounds.size.x / background.bounds.size.y;
+		float fgRatio = foreground.bounds.size.x / foreground.bounds.size.y;
 
-        //float minRatio = bgRatio > fgRatio ? fgRatio : bgRatio;
-        //cam.orthographicSize = background.bounds.size.x * (1 - 1/screenRaio) / 2;
-    }
+		float minRatio = bgRatio > fgRatio ? fgRatio : bgRatio;
+		cam.orthographicSize = foreground.bounds.size.x * (1/screenRaio ) / 2;
+		}
 }
 
