@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Meteor
   - Drop
+  - Stone
   layers:
   - Default
   - TransparentFX

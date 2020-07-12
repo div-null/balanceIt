@@ -75,10 +75,10 @@ public class Game : Singleton<Game>
 			{
 			yield return new WaitForSeconds(1f);
 			GameScore++;
-            if (GameScore > 5)
+            if (GameScore > 1)
                 StartCoroutine(SpawnStones());
 
-            if (GameScore > 12)
+            if (GameScore > 2)
                 StartCoroutine(SpawnMeteorites());
             }
 		}
@@ -87,13 +87,13 @@ public class Game : Singleton<Game>
     IEnumerator SpawnStones()
     {
         yield return new WaitForSeconds(3f);
-        Instantiate(stonePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
+        Instantiate(stonePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
     }
 
     IEnumerator SpawnMeteorites()
     {
-        yield return new WaitForSeconds(5f);
-        Instantiate(meteoritePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
+        yield return new WaitForSeconds(1f);
+        Instantiate(meteoritePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
     }
 
     public IEnumerator StartGame ()
@@ -113,6 +113,7 @@ public class Game : Singleton<Game>
         Destroy(Platform);
         Destroy(Ball);
         World.SetActive(false);
+        DestroyBombs();
         ChangeScore -= GameUI.Instance.DrawScore;
         GeneralUI.Instance.ToEndMatchMenu(GameScore);
         StopAllCoroutines();
@@ -127,9 +128,18 @@ public class Game : Singleton<Game>
         Destroy(Platform);
         Destroy(Ball);
         World.SetActive(false);
+        DestroyBombs();
         ChangeScore -= GameUI.Instance.DrawScore;
         GeneralUI.Instance.toMainMenu();
         StopAllCoroutines();
+    }
+
+    public void DestroyBombs()
+    {
+        foreach (var item in GameObject.FindGameObjectsWithTag("Meteor"))
+            Destroy(item);
+        foreach (var item in GameObject.FindGameObjectsWithTag("Stone"))
+            Destroy(item);
     }
 
 }

@@ -11,8 +11,13 @@ public class GeneralUI : Singleton<GeneralUI>
     public GameObject toMainMenuButton;
     public GameObject world;
 
+    public SpriteRenderer background;
+    public SpriteRenderer foreground;
 
-	public void ExitGame ()
+
+
+
+    public void ExitGame ()
 	{
 		Application.Quit();
 	}
@@ -65,7 +70,15 @@ public class GeneralUI : Singleton<GeneralUI>
 	// Start is called before the first frame update
 	void Start ()
 	{
+
 		toMainMenu();
-	}
+        //Camera cam = Camera.main;
+        //float screenRaio = (float)Screen.width / Screen.height;
+        //float bgRatio = background.bounds.size.x / background.bounds.size.y;
+        //float fgRatio = foreground.bounds.size.x / foreground.bounds.size.y;
+
+        //float minRatio = bgRatio > fgRatio ? fgRatio : bgRatio;
+        //cam.orthographicSize = background.bounds.size.x * (1 - 1/screenRaio) / 2;
+    }
 }
 
