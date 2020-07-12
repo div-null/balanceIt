@@ -23,6 +23,9 @@ public class Game : Singleton<Game>
     public GameObject Platform;
     public GameObject Ball;
 
+    public AudioSource explosionAudio;
+    public AudioSource stoneImpactAudio;
+
     private int gameScore;
 	public int GameScore
 		{
@@ -76,7 +79,10 @@ public class Game : Singleton<Game>
 			}
 
         if (other.tag == "Meteor" || other.tag =="Stone")
-            Destroy(other, 0.5f);
+            {
+            Debug.Log("Meteor");
+            Destroy(other.gameObject);
+            }
         }
 
 	IEnumerator IncreaseScore ()
@@ -97,9 +103,9 @@ public class Game : Singleton<Game>
         {
 			float coeff = 1 + GameScore / 10f;
 			float spawnDelay = (baseDelay / coeff < minSpawnDelay) ? minSpawnDelay : baseDelay / coeff;
-			Debug.Log($"Stone = {spawnDelay}");
+			//Debug.Log($"Stone = {spawnDelay}");
 			yield return new WaitForSeconds(spawnDelay);
-			Instantiate(stonePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+			Instantiate(stonePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 1), new Quaternion(0, 0, 0, 0));
         }
     }
 
@@ -111,9 +117,9 @@ public class Game : Singleton<Game>
         {
 			float coeff = 1 + GameScore / 13f;
 			float spawnDelay = (baseDelay / coeff < minSpawnDelay) ? minSpawnDelay : baseDelay / coeff;
-			Debug.Log($"Meteor = {spawnDelay}");
+			//Debug.Log($"Meteor = {spawnDelay}");
 			yield return new WaitForSeconds(spawnDelay);
-			Instantiate(meteoritePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+			Instantiate(meteoritePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 1), new Quaternion(0, 0, 0, 0));
         }
     }
 

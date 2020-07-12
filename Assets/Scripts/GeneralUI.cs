@@ -13,6 +13,7 @@ public class GeneralUI : Singleton<GeneralUI>
     public SpriteRenderer background;
     public SpriteRenderer foreground;
 
+    public AudioSource select;
     public Text tutorialText;
     public GameObject tutorialPopup;
     bool isHide = true;
@@ -24,18 +25,21 @@ public class GeneralUI : Singleton<GeneralUI>
     //PAUSE MENU
     public void PressPause()
     {
+        select.Play();
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void PressResume()
     {
+        select.Play();
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void PressRestart()
     {
+        select.Play();
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         StartCoroutine(Game.Instance.ExitGame());
@@ -45,6 +49,7 @@ public class GeneralUI : Singleton<GeneralUI>
 
     public void PressTutorial()
     {
+        select.Play();
         if (isHide)
         {
             tutorialPopup.gameObject.SetActive(true);
@@ -56,7 +61,8 @@ public class GeneralUI : Singleton<GeneralUI>
 
     public void ExitGame ()
 	{
-		Application.Quit();
+        select.Play();
+        Application.Quit();
 	}
 	public void toMainMenu ()
 	{
@@ -66,13 +72,15 @@ public class GeneralUI : Singleton<GeneralUI>
     }
     public void BacktoMainMenu()
     {
+        select.Play();
         StartCoroutine(Game.Instance.ExitGame());
         toMainMenu();
     }
 
     public void PressPlay()
 	{
-		mainMenu.SetActive(false);
+        select.Play();
+        mainMenu.SetActive(false);
         endMatchMenu.SetActive(false);
         gameUI.SetActive(true);
         gameUI.GetComponent<GameUI>().StartGame();
@@ -92,8 +100,15 @@ public class GeneralUI : Singleton<GeneralUI>
 		gameUI.SetActive(false);
     }
 
-	// Start is called before the first frame update
-	void Start ()
+    private void Update()
+    {
+        if (Input.anyKey)
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+                PressPause();
+    }
+
+    // Start is called before the first frame update
+    void Start ()
 	{
         briefing = $"Welcome to the game <color={accent}>“Balance It”</color>, where you should hold the <color={accent}>magic ball</color> on the hovering <color={accent}>island</color>" +
                         $" as long as possible and do not let it drop out. Drag your mouse horizontally to rotate the island.\n\rBe careful! Falling <color={accent}>rocks</color>" +
@@ -107,6 +122,6 @@ public class GeneralUI : Singleton<GeneralUI>
 
 		float minRatio = bgRatio > fgRatio ? fgRatio : bgRatio;
 		cam.orthographicSize = foreground.bounds.size.x * (1/screenRaio ) / 2;
-		}
+	}
 }
 
