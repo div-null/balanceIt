@@ -91,19 +91,29 @@ public class Game : Singleton<Game>
 
     IEnumerator SpawnStones()
     {
-        while (true)
+		float baseDelay = 2f;
+		float minSpawnDelay = 0.3f;
+		while (true)
         {
-        yield return new WaitForSeconds(2f);
-        Instantiate(stonePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+			float coeff = 1 + GameScore / 10f;
+			float spawnDelay = (baseDelay / coeff < minSpawnDelay) ? minSpawnDelay : baseDelay / coeff;
+			Debug.Log($"Stone = {spawnDelay}");
+			yield return new WaitForSeconds(spawnDelay);
+			Instantiate(stonePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
         }
     }
 
     IEnumerator SpawnMeteorites()
     {
-        while (true)
+		float baseDelay = 3f;
+		float minSpawnDelay = 0.5f;
+		while (true)
         {
-        yield return new WaitForSeconds(3f);
-        Instantiate(meteoritePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+			float coeff = 1 + GameScore / 13f;
+			float spawnDelay = (baseDelay / coeff < minSpawnDelay) ? minSpawnDelay : baseDelay / coeff;
+			Debug.Log($"Meteor = {spawnDelay}");
+			yield return new WaitForSeconds(spawnDelay);
+			Instantiate(meteoritePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
         }
     }
 
