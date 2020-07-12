@@ -54,7 +54,18 @@ public class Game : Singleton<Game>
 		{
 		World.SetActive(false);
 		deadZone = GetComponent<Collider2D>();
-		}
+        ChangeScore += ChangeDifficulty;
+
+        }
+
+    private void ChangeDifficulty(int Score)
+    {
+        if (GameScore == 3)
+            StartCoroutine(SpawnStones());
+
+        if (GameScore == 8)
+            StartCoroutine(SpawnMeteorites());
+    }
 
 	private void OnTriggerEnter2D (Collider2D other)
 		{
@@ -74,25 +85,26 @@ public class Game : Singleton<Game>
 			{
 			yield return new WaitForSeconds(1f);
 			GameScore++;
-            if (GameScore > 1)
-                StartCoroutine(SpawnStones());
-
-            if (GameScore > 2)
-                StartCoroutine(SpawnMeteorites());
             }
 		}
 
 
     IEnumerator SpawnStones()
     {
-        yield return new WaitForSeconds(3f);
+        while (true)
+        {
+        yield return new WaitForSeconds(2f);
         Instantiate(stonePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+        }
     }
 
     IEnumerator SpawnMeteorites()
     {
-        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+        yield return new WaitForSeconds(3f);
         Instantiate(meteoritePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+        }
     }
 
     public IEnumerator StartGame ()
@@ -120,7 +132,6 @@ public class Game : Singleton<Game>
 
     public IEnumerator ExitGame()
     {
-        yield return new WaitForEndOfFrame();
         //StopCoroutine(IncreaseScore());
         //StopCoroutine(SpawnMeteorites());
         //StopCoroutine(SpawnStones());
@@ -131,6 +142,7 @@ public class Game : Singleton<Game>
         ChangeScore -= GameUI.Instance.DrawScore;
         GeneralUI.Instance.toMainMenu();
         StopAllCoroutines();
+        yield return new WaitForEndOfFrame();
     }
 
     public void DestroyBombs()

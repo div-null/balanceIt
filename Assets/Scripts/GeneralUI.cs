@@ -6,16 +6,33 @@ public class GeneralUI : Singleton<GeneralUI>
 {
 	public GameObject gameUI;
 	public GameObject mainMenu;
-	public GameObject customizeMenu;
     public GameObject endMatchMenu;
-    public GameObject toMainMenuButton;
-    public GameObject world;
+    public GameObject pauseMenu;
 
     public SpriteRenderer background;
     public SpriteRenderer foreground;
 
+    //PAUSE MENU
+    public void PressPause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
 
+    public void PressResume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
 
+    public void PressRestart()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        StartCoroutine(Game.Instance.ExitGame());
+        PressPlay();
+    }
+    //
 
     public void ExitGame ()
 	{
@@ -24,10 +41,7 @@ public class GeneralUI : Singleton<GeneralUI>
 	public void toMainMenu ()
 	{
         gameUI.SetActive(false);
-		customizeMenu.SetActive(false);
         endMatchMenu.SetActive(false);
-        toMainMenuButton.SetActive(false);
-        //world.SetActive(false);
 		mainMenu.SetActive(true);
     }
     public void BacktoMainMenu()
@@ -36,24 +50,18 @@ public class GeneralUI : Singleton<GeneralUI>
         toMainMenu();
     }
 
-    public void PressPlay ()
+    public void PressPlay()
 	{
-		customizeMenu.SetActive(false);
 		mainMenu.SetActive(false);
-        toMainMenuButton.SetActive(false);
         endMatchMenu.SetActive(false);
-        //world.SetActive(true);
         gameUI.SetActive(true);
-        toMainMenuButton.SetActive(true);
         gameUI.GetComponent<GameUI>().StartGame();
     }
 
     public void ToEndMatchMenu(int _score)
     {
-        customizeMenu.SetActive(false);
         mainMenu.SetActive(false);
         gameUI.SetActive(false);
-        toMainMenuButton.SetActive(false);
         endMatchMenu.SetActive(true);
         endMatchMenu.GetComponent<EndMatchMenu>().UpdateInformation(_score);
     }
@@ -62,9 +70,6 @@ public class GeneralUI : Singleton<GeneralUI>
 	{
 		mainMenu.SetActive(false);
 		gameUI.SetActive(false);
-        toMainMenuButton.SetActive(false);
-        customizeMenu.SetActive(true);
-        toMainMenuButton.SetActive(true);
     }
 
 	// Start is called before the first frame update

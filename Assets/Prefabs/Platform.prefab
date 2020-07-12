@@ -46,11 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
   platform: {fileID: 0}
-  forcePush: 10
+  forcePush: 3.5
   pushDeadZone: 0.2
   staticAngularDrag: 8
   dynamicAngularDrag: 0.0002
-  maxAngularVelocity: 120
+  maxStaticAngularVelocity: 60
 --- !u!1001 &2292970782273266895
 PrefabInstance:
   m_ObjectHideFlags: 0
