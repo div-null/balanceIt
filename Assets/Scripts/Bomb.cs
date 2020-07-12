@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     private PointEffector2D explosion;
+    public int _forceMagnitude = 90;
+    public float _destroyDelay = 0.001f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +17,10 @@ public class Bomb : MonoBehaviour
 
     private void StartExplosion()
     {
-        explosion.forceMagnitude = 100;
-        Destroy(this.gameObject, 0.5f);
-        Debug.Log("detonate");
+        explosion.forceMagnitude = _forceMagnitude;
+        explosion.forceVariation = _forceMagnitude / 2;
+        explosion.distanceScale = 0.1f;
+        Destroy(this.gameObject, Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

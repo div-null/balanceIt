@@ -11,14 +11,19 @@ public class Game : Singleton<Game>
 	//мертвая зона для мяча
 	public Collider2D deadZone;
 
-    public GameObject bombPrefab;
+    public GameObject stonePrefab;
     public GameObject meteoritePrefab;
-    public GameObject dropPrefab;
 
     [SerializeField]
 	public GameObject World;
 
-	private int gameScore;
+    public GameObject PlatformPrefab;
+    public GameObject BallPrefrab;
+
+    public GameObject Platform;
+    public GameObject Ball;
+
+    private int gameScore;
 	public int GameScore
 		{
 		get
@@ -34,11 +39,16 @@ public class Game : Singleton<Game>
 		}
 	public void Initialize ()
 		{
+        // поставить палку
+        // заспавнить мяч
+
+        //Не влияет на переход в MainMenu
+        GameScore = 0;
+        StartCoroutine(StartGame());
 		ChangeScore += GameUI.Instance.DrawScore;
-		// поставить палку
-		// заспавнить мяч
-		StartCoroutine(StartGame());
-		}
+        Platform = Instantiate(PlatformPrefab, World.transform);
+        Ball = Instantiate(BallPrefrab, World.transform);
+    }
 
 	private void Start ()
 		{
@@ -48,14 +58,16 @@ public class Game : Singleton<Game>
 
 	private void OnTriggerEnter2D (Collider2D other)
 		{
-		Debug.Log("Trigger enter");
-		if ( other.tag == "ball" )
+        Debug.Log("wasd");
+		if ( other.tag == "Ball" )
 			{
 			Destroy(other, 1f);
 			StartCoroutine(EndGame());
 			}
-		
-		}
+
+        if (other.tag == "Meteor" || other.tag =="Stone")
+            Destroy(other, 0.5f);
+        }
 
 	IEnumerator IncreaseScore ()
 		{
@@ -63,26 +75,19 @@ public class Game : Singleton<Game>
 			{
 			yield return new WaitForSeconds(1f);
 			GameScore++;
-            if (GameScore > 10)
-                StartCoroutine(SpawnBombs());
+            if (GameScore > 5)
+                StartCoroutine(SpawnStones());
 
-            if (GameScore > 15)
+            if (GameScore > 12)
                 StartCoroutine(SpawnMeteorites());
             }
 		}
 
 
-
-    IEnumerator SpawnBombs()
+    IEnumerator SpawnStones()
     {
         yield return new WaitForSeconds(3f);
-        Instantiate(bombPrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
-    }
-
-    IEnumerator SpawnDrops()
-    {
-        yield return new WaitForSeconds(1f);
-        Instantiate(dropPrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
+        Instantiate(stonePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
     }
 
     IEnumerator SpawnMeteorites()
@@ -91,7 +96,7 @@ public class Game : Singleton<Game>
         Instantiate(meteoritePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.25f, 0), new Quaternion(0, 0, 0, 0));
     }
 
-    IEnumerator StartGame ()
+    public IEnumerator StartGame ()
 		{
 		StopCoroutine(IncreaseScore());
 		World.SetActive(true);
@@ -99,15 +104,34 @@ public class Game : Singleton<Game>
 		StartCoroutine(IncreaseScore());
 		}
 
-	IEnumerator EndGame ()
+	public IEnumerator EndGame()
 		{
 		yield return new WaitForEndOfFrame();
-		StopCoroutine(IncreaseScore());
-		World.SetActive(false);
-		ChangeScore -= GameUI.Instance.DrawScore;
-		GameUI.Instance.FinishGame(gameScore);
-		}
+        //StopCoroutine(IncreaseScore());
+        //StopCoroutine(SpawnMeteorites());
+        //StopCoroutine(SpawnStones());
+        Destroy(Platform);
+        Destroy(Ball);
+        World.SetActive(false);
+        ChangeScore -= GameUI.Instance.DrawScore;
+        GeneralUI.Instance.ToEndMatchMenu(GameScore);
+        StopAllCoroutines();
+        }
 
-	}
+    public IEnumerator ExitGame()
+    {
+        yield return new WaitForEndOfFrame();
+        //StopCoroutine(IncreaseScore());
+        //StopCoroutine(SpawnMeteorites());
+        //StopCoroutine(SpawnStones());
+        Destroy(Platform);
+        Destroy(Ball);
+        World.SetActive(false);
+        ChangeScore -= GameUI.Instance.DrawScore;
+        GeneralUI.Instance.toMainMenu();
+        StopAllCoroutines();
+    }
+
+}
 
 

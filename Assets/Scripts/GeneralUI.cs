@@ -2,36 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneralUI : MonoBehaviour
+public class GeneralUI : Singleton<GeneralUI>
 {
 	public GameObject gameUI;
 	public GameObject mainMenu;
 	public GameObject customizeMenu;
     public GameObject endMatchMenu;
     public GameObject toMainMenuButton;
-    
+    public GameObject world;
+
+
 	public void ExitGame ()
 	{
 		Application.Quit();
 	}
 	public void toMainMenu ()
 	{
-		gameUI.SetActive(false);
+        gameUI.SetActive(false);
 		customizeMenu.SetActive(false);
         endMatchMenu.SetActive(false);
         toMainMenuButton.SetActive(false);
+        //world.SetActive(false);
 		mainMenu.SetActive(true);
     }
+    public void BacktoMainMenu()
+    {
+        StartCoroutine(Game.Instance.ExitGame());
+        toMainMenu();
+    }
 
-	public void PressPlay ()
+    public void PressPlay ()
 	{
 		customizeMenu.SetActive(false);
 		mainMenu.SetActive(false);
         toMainMenuButton.SetActive(false);
+        endMatchMenu.SetActive(false);
+        //world.SetActive(true);
         gameUI.SetActive(true);
         toMainMenuButton.SetActive(true);
         gameUI.GetComponent<GameUI>().StartGame();
-	}
+    }
 
     public void ToEndMatchMenu(int _score)
     {

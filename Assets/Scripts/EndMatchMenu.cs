@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EndMatchMenu : MonoBehaviour
+public class EndMatchMenu : Singleton<EndMatchMenu>
 {
-    private Text scoreText;
+    public Text scoreText;
 
     public void UpdateInformation(int _score)
     {

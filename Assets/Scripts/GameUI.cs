@@ -11,19 +11,10 @@ public class GameUI : Singleton<GameUI>
 
 	public Text ScoreText;
 
-	private void Start ()
-		{
-		Game.Instance.Initialize();
-		}
-
 	public void StartGame ()
 		{
-		ScoreText.text = "Score: 0";
-		}
-
-	public void FinishGame (int score)
-		{
-        FindObjectOfType<Canvas>().GetComponent<GeneralUI>().ToEndMatchMenu(score);
+        Game.Instance.Initialize();
+        ScoreText.text = "Score: 0";
 		}
 
 	public void DrawScore (int score)
