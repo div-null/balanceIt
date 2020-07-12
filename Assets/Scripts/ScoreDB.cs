@@ -12,7 +12,7 @@ public class ScoreDB : IDisposable
 
 	public void Load ()
 		{
-		LoadScore();
+		BestScore = LoadScore();
 		}
 
 	/// <summary>
@@ -45,7 +45,7 @@ public class ScoreDB : IDisposable
 		{
 		string key = "score";
 		PlayerPrefs.SetInt(key, BestScore);
-			
+		PlayerPrefs.Save();
 		}
 
 	public void Dispose ()
