@@ -58,7 +58,6 @@ public class Game : Singleton<Game>
 
 	private void OnTriggerEnter2D (Collider2D other)
 		{
-        Debug.Log("wasd");
 		if ( other.tag == "Ball" )
 			{
 			Destroy(other, 1f);
