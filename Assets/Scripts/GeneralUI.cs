@@ -14,6 +14,7 @@ public class GeneralUI : Singleton<GeneralUI>
     public SpriteRenderer foreground;
 
     public Text tutorialText;
+    public AudioClip select;
     public GameObject tutorialPopup;
     bool isHide = true;
     string accent = "#f6b778";
@@ -25,7 +26,6 @@ public class GeneralUI : Singleton<GeneralUI>
     public void PressPause()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0;
     }
 
     public void PressResume()
