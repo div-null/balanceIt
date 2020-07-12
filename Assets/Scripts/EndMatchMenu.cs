@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EndMatchMenu : Singleton<EndMatchMenu>
 {
     public Text scoreText;
+    public Text bestScoreText;
 	public ScoreDB scoreDB = new ScoreDB();
 
 	public void UpdateInformation(int _score)
@@ -16,7 +17,8 @@ public class EndMatchMenu : Singleton<EndMatchMenu>
 		int bestScore = scoreDB.BestScore;
 		Debug.Log(bestScore);
 
-		scoreText.text = "Score: " + _score;
+        bestScoreText.text = bestScore.ToString();
+        scoreText.text = _score.ToString();
     }
 
     // Start is called before the first frame update
