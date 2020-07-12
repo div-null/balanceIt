@@ -6,7 +6,7 @@ public class Bomb : MonoBehaviour
 {
     private PointEffector2D explosion;
     public GameObject _explosionAnim;
-    public int _forceMagnitude = 100;
+    public int _forceMagnitude = 50;
     public float _destroyDelay = 0.05f;
     Rigidbody2D body;
 
@@ -22,7 +22,7 @@ public class Bomb : MonoBehaviour
     {
 
         explosion.forceMagnitude = _forceMagnitude;
-        explosion.forceVariation = _forceMagnitude / 2;
+        explosion.forceVariation = _forceMagnitude;
         explosion.distanceScale = 0.1f;
         var obj = Instantiate(_explosionAnim, transform.position, Quaternion.identity);
 
