@@ -87,13 +87,13 @@ public class Game : Singleton<Game>
     IEnumerator SpawnStones()
     {
         yield return new WaitForSeconds(3f);
-        Instantiate(stonePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+        Instantiate(stonePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
     }
 
     IEnumerator SpawnMeteorites()
     {
         yield return new WaitForSeconds(1f);
-        Instantiate(meteoritePrefab, new Vector3(Random.Range(-6f, 6f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
+        Instantiate(meteoritePrefab, new Vector3(Random.Range(-5.5f, 5.5f), Camera.main.ScreenToWorldPoint(Vector3.zero).y * -1.5f, 0), new Quaternion(0, 0, 0, 0));
     }
 
     public IEnumerator StartGame ()

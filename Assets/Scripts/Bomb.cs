@@ -13,7 +13,6 @@ public class Bomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         explosion = this.gameObject.GetComponentInChildren<PointEffector2D>();
         explosion.forceMagnitude = 0;
     }

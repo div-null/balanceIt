@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1705620172786361162}
   - component: {fileID: 1705620172786361163}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,9 +91,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5610081955787017104}
   - component: {fileID: 4296167458434826081}
-  - component: {fileID: 519400256265148791}
-  - component: {fileID: 7275521037351381086}
-  m_Layer: 0
+  - component: {fileID: 5559337931443051973}
+  m_Layer: 9
   m_Name: Stone
   m_TagString: Stone
   m_Icon: {fileID: 0}
@@ -127,7 +126,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 0.08
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -136,24 +135,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &519400256265148791
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6306867303546836168}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.18098688
---- !u!68 &7275521037351381086
-EdgeCollider2D:
+--- !u!60 &5559337931443051973
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,18 +149,23 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -1.706338, y: -1.6642176}
-  - {x: -1.2123945, y: -2.0137415}
-  - {x: 0.6695862, y: -1.9826924}
-  - {x: 1.1712931, y: -1.7703098}
-  - {x: 2.0141277, y: -0.34104085}
-  - {x: 1.9102775, y: 0.8200519}
-  - {x: 1.8076891, y: 1.0776993}
-  - {x: 0.37430355, y: 2.0466166}
-  - {x: -0.24711323, y: 1.9624918}
-  - {x: -1.9435223, y: 0.7457353}
-  - {x: -2.0547855, y: 0.46786934}
-  - {x: -1.7265046, y: -1.6106795}
-  - {x: -1.7016556, y: -1.6672696}
+    m_Paths:
+    - - {x: 1.7888281, y: 1.0922527}
+      - {x: 0.28952634, y: 2.0528245}
+      - {x: -0.21408014, y: 1.9935346}
+      - {x: -2.0668964, y: 0.5199969}
+      - {x: -1.7230152, y: -1.5709615}
+      - {x: -1.21948, y: -2.0724058}
+      - {x: 0.66391313, y: -2.0215142}
+      - {x: 1.1931596, y: -1.8092012}
+      - {x: 2.0038815, y: -0.21739483}
