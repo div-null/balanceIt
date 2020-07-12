@@ -96,7 +96,7 @@ public class GeneralUI : Singleton<GeneralUI>
 	void Start ()
 	{
         briefing = $"Welcome to the game <color={accent}>“Balance It”</color>, where you should hold the <color={accent}>magic ball</color> on the hovering <color={accent}>island</color>" +
-                        $" as long as possible and do not let it drop out. Drag your mouse horizontally to rotate the island.\n\rBe careful!Falling <color={accent}>rocks</color>" +
+                        $" as long as possible and do not let it drop out. Drag your mouse horizontally to rotate the island.\n\rBe careful! Falling <color={accent}>rocks</color>" +
                         $" and <color={accent}>meteorites</color> will disturb you.\n\rGood luck!";
         tutorialText.text = briefing;
         toMainMenu();
