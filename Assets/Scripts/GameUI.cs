@@ -21,4 +21,10 @@ public class GameUI : Singleton<GameUI>
 		{
 		ScoreText.text = "Score: " + score;
 		}
+    private void Update()
+    {
+        if (Input.anyKey)
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
+                GeneralUI.Instance.PressPause();
+    }
 }

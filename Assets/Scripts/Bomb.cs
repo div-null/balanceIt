@@ -16,12 +16,14 @@ public class Bomb : MonoBehaviour, IDisposable
     void Start()
     {
         _fallingAudio = this.gameObject.GetComponentInChildren<AudioSource>();
+
         explosion = this.gameObject.GetComponentInChildren<PointEffector2D>();
         explosion.forceMagnitude = 0;
     }
 
     private void StartExplosion()
     {
+        //StartCoroutine(FallEcho());
         _fallingAudio.Stop();
         explosion.forceMagnitude = _forceMagnitude;
         explosion.forceVariation = _forceMagnitude;
@@ -30,6 +32,19 @@ public class Bomb : MonoBehaviour, IDisposable
         Game.Instance.explosionAudio.Play();
         Destroy(obj, 1);
         Destroy(this.gameObject, Time.deltaTime);
+    }
+
+    IEnumerator FallEcho()
+    {
+        float echoTime = 0.3f;
+        float ellapsed = 0f;
+        while (ellapsed<echoTime)
+        {
+            _fallingAudio.volume *= 0.8f;
+            yield return new WaitForEndOfFrame();
+            ellapsed += Time.fixedDeltaTime;
+        }
+        _fallingAudio.Stop();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

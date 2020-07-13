@@ -81,7 +81,7 @@ public class Game : Singleton<Game>
         if (other.tag == "Meteor" || other.tag =="Stone")
             {
             Debug.Log("Meteor");
-            Destroy(other.gameObject);
+            Destroy(other.gameObject, 0.5f);
             }
         }
 

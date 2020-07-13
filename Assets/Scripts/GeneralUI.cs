@@ -100,13 +100,6 @@ public class GeneralUI : Singleton<GeneralUI>
 		gameUI.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.anyKey)
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape))
-                PressPause();
-    }
-
     // Start is called before the first frame update
     void Start ()
 	{
