@@ -19,11 +19,14 @@ public class ScoreDB : IDisposable
 	/// Устанавливает счет, если новый счет больше
 	/// </summary>
 	/// <param name="score"></param>
-	public void SetScore (int score)
-		{
+	public bool SetScore (int score)
+	{
+		bool isScoreBestScore = score > BestScore ? true : false;
 		BestScore = score > BestScore ? score : BestScore;
 		UpLoadScore();
-		}
+
+		return isScoreBestScore;
+	}
 
 	/// <summary>
 	/// Загружает данные из хранилища
@@ -31,7 +34,7 @@ public class ScoreDB : IDisposable
 	/// <returns></returns>
 	private int LoadScore ()
 		{
-		string key = "score";
+		string key = "BestScore";
 		int score = 0;
 		if ( PlayerPrefs.HasKey(key) )
 			score = PlayerPrefs.GetInt(key);
@@ -42,11 +45,11 @@ public class ScoreDB : IDisposable
 	/// Выгружает данные в хранилище
 	/// </summary>
 	private void UpLoadScore ()
-		{
-		string key = "score";
+	{
+		string key = "BestScore";
 		PlayerPrefs.SetInt(key, BestScore);
 		PlayerPrefs.Save();
-		}
+	}
 
 	public void Dispose ()
 		{

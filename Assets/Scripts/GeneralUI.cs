@@ -15,7 +15,8 @@ public class GeneralUI : Singleton<GeneralUI>
 
     public AudioSource select;
     public Text tutorialText;
-    public GameObject tutorialPopup;
+    public GameObject tutorialWindow;
+
     bool isHide = true;
     string accent = "#f6b778";
     string plain = "#9e6541";
@@ -47,16 +48,17 @@ public class GeneralUI : Singleton<GeneralUI>
     }
     //
 
-    public void PressTutorial()
+    public void OpenTutorial()
     {
         select.Play();
-        if (isHide)
-        {
-            tutorialPopup.gameObject.SetActive(true);
-        }
-        else
-            tutorialPopup.gameObject.SetActive(false);
+        tutorialWindow.gameObject.SetActive(true);
         isHide = !isHide;
+    }
+
+    public void CloseTutorial()
+    {
+        select.Play();
+        tutorialWindow.gameObject.SetActive(false);
     }
 
     public void ExitGame ()
@@ -104,7 +106,7 @@ public class GeneralUI : Singleton<GeneralUI>
     void Start ()
 	{
         briefing = $"Welcome to the game <color={accent}>“Balance It”</color>, where you should hold the <color={accent}>magic ball</color> on the hovering <color={accent}>island</color>" +
-                        $" as long as possible and do not let it drop out. Drag your mouse horizontally to rotate the island.\n\rBe careful! Falling <color={accent}>rocks</color>" +
+                        $" as long as possible and do not let it drop out. Drag horizontally to rotate the island.\n\r<color={accent}>Be careful!</color> Falling <color={accent}>rocks</color>" +
                         $" and <color={accent}>meteorites</color> will disturb you.\n\rGood luck!";
         tutorialText.text = briefing;
         toMainMenu();

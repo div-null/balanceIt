@@ -9,16 +9,41 @@ public class EndMatchMenu : Singleton<EndMatchMenu>
     public Text bestScoreText;
 	public ScoreDB scoreDB = new ScoreDB();
 
-	public void UpdateInformation(int _score)
+    public Text CustomTitleAfterGameText;
+
+    public void UpdateInformation(int _score)
     {
 		scoreDB.Load();
 		// записываю текущий счет
-		scoreDB.SetScore(_score);
+		bool isRecord = scoreDB.SetScore(_score);
 		int bestScore = scoreDB.BestScore;
-		Debug.Log(bestScore);
 
+        SetCustomTitleAAfterGame(isRecord);
         bestScoreText.text = bestScore.ToString();
         scoreText.text = _score.ToString();
+    }
+
+    public void SetCustomTitleAAfterGame(bool isNewRecord)
+    {
+        Color recordColor = new Color(1f, 0.753f, 0.127f, 1f);
+        Color gameOverColor = new Color(0f, 0.832f, 1f, 1f);
+
+        if (isNewRecord)
+        {
+            CustomTitleAfterGameText.text = "New High Score!";
+            CustomTitleAfterGameText.color = recordColor;
+            scoreText.color = recordColor;
+            bestScoreText.color = recordColor;
+            CustomTitleAfterGameText.GetComponent<Animator>().SetInteger("active", 0);
+        }
+        else
+        {
+            CustomTitleAfterGameText.text = "GAME OVER";
+            CustomTitleAfterGameText.color = gameOverColor;
+            scoreText.color = Color.white;
+            bestScoreText.color = Color.white;
+            CustomTitleAfterGameText.GetComponent<Animator>().SetInteger("active", 1);
+        }
     }
 
     // Start is called before the first frame update

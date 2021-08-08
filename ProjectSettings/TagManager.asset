@@ -10,6 +10,9 @@ TagManager:
   - Meteor
   - Drop
   - Stone
+  - Coin
+  - Growth
+  - Fragment
   layers:
   - Default
   - TransparentFX
